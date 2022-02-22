@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FILMS>
+<FILM Annee='1958'>
+<TITRE>Vertigo</TITRE>
+<GENRE>Drame</GENRE><PAYS>USA</PAYS><MES id_mes="_3"></MES>
+<ROLES>
+<ROLE><PRENOM>James</PRENOM><NOM>Stewart</NOM>
+<INTITULE>John Ferguson</INTITULE></ROLE><ROLE><PRENOM>Kim</PRENOM><NOM>Novak</NOM>
+<INTITULE>Madeleine Elster</INTITULE></ROLE></ROLES>
+<RESUME>bad bad terrible horrible very bad super bad disappointing very very terrible not good very bad</RESUME>
+</FILM>
+<FILM Annee='1979'>
+<TITRE>Alien</TITRE>
+<GENRE>Science-fiction</GENRE><PAYS>USA</PAYS><MES id_mes="_4"></MES>
+<ROLES>
+<ROLE><PRENOM>Sigourney</PRENOM><NOM>Weaver</NOM>
+<INTITULE>Ripley</INTITULE></ROLE></ROLES>
+<RESUME>good good very good perfect excellent super good loved it very good super good loved it</RESUME>
+</FILM>
+<FILM Annee='1997'>
+<TITRE>Titanic</TITRE>
+<GENRE>Drame</GENRE><PAYS>USA</PAYS><MES id_mes="_6"></MES>
+<ROLES>
+<ROLE><PRENOM>Kate</PRENOM><NOM>Winslet</NOM>
+<INTITULE>Rose DeWitt Bukater</INTITULE></ROLE><ROLE><PRENOM>Leonardo</PRENOM><NOM>DiCaprio</NOM>
+<INTITULE>Jack Dawson</INTITULE></ROLE></ROLES>
+<RESUME>perfect super good very very good loved it great movie great loved it very sad but very good</RESUME>
+</FILM>
+</FILMS>
