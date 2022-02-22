@@ -1,0 +1,65 @@
+@base <http://humans/instances/#> .
+@prefix : <http://humans/#> .
+
+<David> a :Man,
+        :Person,
+        :Researcher ;
+    :hasFriend <Gaston> ;
+    :hasSpouse <Eve> ;
+    :name "David" .
+
+<Eve> a :Lecturer,
+        :Woman ;
+    :hasFriend <Alice> ;
+    :hasSpouse <David> ;
+    :name "Eve" .
+
+<Mark> a :Man ;
+    :age "14" ;
+    :hasFather <John> ;
+    :name "Mark" .
+
+<Sophie> a :Woman ;
+    :hasSpouse <Harry> ;
+    :name "Sophie" .
+
+<Alice> a :Person ;
+    :hasFriend <John> ;
+    :name "Alice" .
+
+<Flora> a :Woman ;
+    :age "95" ;
+    :hasChild <Pierre> ;
+    :hasSpouse <Gaston> ;
+    :name "Flora" .
+
+<Jack> a :Man ;
+    :hasChild <Harry> ;
+    :name "Jack" .
+
+<Pierre> a :Man ;
+    :age "62" ;
+    :hasFather <Gaston> ;
+    :hasMother <Flora> ;
+    :name "Pierre" .
+
+<Gaston> a :Man ;
+    :age "102" ;
+    :hasChild <Jack>,
+        <Pierre> ;
+    :hasSpouse <Flora> ;
+    :name "Gaston" .
+
+<Harry> a :Man ;
+    :hasChild <John> ;
+    :hasFather <Jack> ;
+    :hasSpouse <Sophie> ;
+    :name "Harry" .
+
+<John> a :Man ;
+    :age "37" ;
+    :hasChild <Mark> ;
+    :hasFather <Harry> ;
+    :hasFriend <Alice> ;
+    :name "John" .
+
