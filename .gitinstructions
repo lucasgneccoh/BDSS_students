@@ -1,0 +1,12 @@
+# Make sure you are in the appropiate branch
+git checkout
+
+# Fetch content from upstream repository
+# git fetch upstream
+git pull upstream main
+
+# Merge. May need to solve merge issues
+git merge upstream/master
+
+# Push to this repo
+git push origin master
