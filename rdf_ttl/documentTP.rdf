@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY humans "http://humans/"> 
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#"> ]>
+
+<rdf:RDF  
+xmlns:rdf ="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:xsd ="&xsd;" 
+xmlns ="&humans;#"
+xml:base  ="&humans;instances/" >
+
+<Man rdf:ID="Harry">
+	<name>Harry</name>
+	<hasFather rdf:resource="#Jack"/>
+	<hasChild rdf:resource="#John"/>
+	<hasSpouse rdf:resource="#Sophie"/>
+</Man>
+
+<Woman rdf:ID="Sophie">
+	<name>Sophie</name>
+	<hasSpouse rdf:resource="#Harry"/>
+</Woman>
+
+
+<Man rdf:ID="John">
+	<name>John</name>
+	<age>37</age>
+	<hasFather rdf:resource="#Harry"/>
+	<hasChild rdf:resource="#Mark"/>
+	<hasFriend rdf:resource="#Alice"/>
+</Man>
+
+<Man rdf:ID="Mark">
+	<name>Mark</name>
+	<age>14</age>
+	<hasFather rdf:resource="#John"/>
+</Man>
+
+<Woman rdf:ID="Eve">
+	<name>Eve</name>
+	<hasSpouse rdf:resource="#David"/>
+	<hasFriend rdf:resource="#Alice"/>
+</Woman>
+
+<Lecturer rdf:about="#Eve" />
+
+<Person rdf:ID="Alice">
+	<name>Alice</name>
+	<hasFriend rdf:resource="#John"/>
+</Person>
+
+<Person rdf:ID="David">
+	<name>David</name>
+	<hasSpouse rdf:resource="#Eve"/>
+	<rdf:type rdf:resource="&humans;#Researcher" />
+	<rdf:type rdf:resource="&humans;#Man"/>
+	<hasFriend rdf:resource="#Gaston"/>
+</Person>
+
+<Woman rdf:ID="Flora">
+	<name>Flora</name>
+	<age>95</age>
+	<hasSpouse rdf:resource="#Gaston"/>
+	<hasChild rdf:resource="#Pierre"/>
+</Woman>
+
+<Man rdf:ID="Gaston">
+	<name>Gaston</name>
+	<age>102</age>
+	<hasSpouse rdf:resource="#Flora"/>
+	<hasChild rdf:resource="#Pierre"/>
+	<hasChild rdf:resource="#Jack"/>
+</Man>
+
+<Man rdf:ID="Pierre">
+	<name>Pierre</name>
+	<age>62</age>
+	<hasMother rdf:resource="#Flora"/>
+	<hasFather rdf:resource="#Gaston"/>
+</Man>
+
+<Man rdf:ID="Jack">
+	<name>Jack</name>
+	<hasChild rdf:resource="#Harry"/>
+</Man>
+
+
+
+</rdf:RDF>
+

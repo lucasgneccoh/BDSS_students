@@ -1,0 +1,209 @@
+1. Return all hotels in Italy. 
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+
+SELECT ?hotel ?hotel_name WHERE{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location dbr:Italy.}
+
+---------------------------------------------
+
+2. Return all hotels in Milan or Venice. 
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+
+SELECT ?hotel ?hotel_name
+WHERE{
+{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location dbr:Milan.}
+UNION
+{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location dbr:Venice.}
+}
+
+
+
+
+
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+
+SELECT ?hotel ?hotel_name ?location
+WHERE{
+{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location ?location.
+?location rdfs:label ?label.
+FILTER(REGEX(lcase(?label), 'milano') AND LANG(?label) = 'it')
+FILTER(LANG(?hotel_name) = 'en').
+}
+UNION
+{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location ?location.
+?location rdfs:label ?label.
+FILTER(REGEX(lcase(?label), 'venezia') AND LANG(?label) = 'it')
+FILTER(LANG(?hotel_name) = 'en').
+}
+}
+
+
+
+---------------------------------------------
+
+3. Is there a hotel in Venezia? 
+Hint: “Venezia” is a plain literal with the language tag “it”. 
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+
+SELECT ?hotel ?hotel_name ?hotel_loc
+WHERE{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location ?hotel_loc.
+?hotel_loc rdfs:label "Venezia"@it.
+}
+
+
+---------------------------------------------
+
+4. Return all hotels in a city WHERE the Rialto Bridge is located. 
+Hint: The DBpedia description for the Rialto Bridge might help you formulate the query.
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+
+SELECT ?hotel ?hotel_name ?hotel_loc
+WHERE{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location ?hotel_loc.
+dbr:Rialto_Bridge dbo:locatedInArea ?hotel_loc.
+?hotel_loc a dbo:City
+}
+
+---------------------------------------------
+
+5. Return all hotels in Italy sorted BY the number of rooms in a descending ORDER. 
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?hotel ?hotel_name ?nb_rooms
+WHERE{
+?hotel a dbo:Hotel.
+?hotel rdfs:label ?hotel_name.
+?hotel dbo:location dbr:Italy.
+?hotel dbo:numberOfRooms ?nb_rooms.
+}
+ORDER BY desc (?nb_rooms)
+LIMIT 20
+
+
+---------------------------------------------
+
+6. Return the German or Italian abstracts of Venice. 
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE{
+dbr:Venice dbo:abstract ?abstract.
+FILTER(LANG(?abstract) = 'en' || LANG(?abstract) = 'de').
+}
+LIMIT 20
+
+
+---------------------------------------------
+
+7. Return hotels whose URIs contain “venice” (case insensitive). 
+
+prefix dbo:<http://dbpedia.org/ontology/>
+prefix dbr:<http://dbpedia.org/resource/>
+SELECT ?hotel
+WHERE{
+?hotel a dbo:Hotel.
+FILTER regex(?hotel, "venice", "i")
+}
+LIMIT 20
+
+
+---------------------------------------------
+
+SECOND PART
+Reading SPARQL Queries 
+
+1. Finds hotels such that its owner is located in Florence
+
+PREFIX s: <http://schema.org/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+SELECT ?h
+WHERE {
+?h a s:Hotel .
+?h dbo:owner [dbo:location dbr:Florence].
+}
+LIMIT 20
+
+---------------------------------------------
+
+2. Shows all hotels in Italy with a website if they have one.
+If they dont have a website, they are still shown.
+
+PREFIX s: <http://schema.org/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+SELECT *
+WHERE {
+?s a s:Hotel .
+?s dbo:location dbr:Italy.
+OPTIONAL { ?s dbp:website ?w }.
+}
+LIMIT 20
+
+
+---------------------------------------------
+
+3. Shows hotels in Italy and their number of rooms such that:
+There is not another hotel in Italy with more rooms
+
+PREFIX s: <http://schema.org/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?s ?n 
+WHERE { 
+?s a s:Hotel . 
+?s dbo:location dbr:Italy .
+?s dbp:numberOfRooms ?n .
+OPTIONAL {
+	?s a s:Hotel .
+	?s dbo:location dbr:Italy .
+	?s dbp:numberOfRooms ?n .
+	?s2 a s:Hotel .
+	?s2 dbo:location dbr:Italy .
+	?s2 dbp:numberOfRooms ?n2.
+	FILTER(?n < ?n2) 
+	}
+FILTER (!(bound(?n2))).
+}
+
+
+
+
